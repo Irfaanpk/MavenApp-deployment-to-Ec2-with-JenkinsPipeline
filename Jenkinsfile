@@ -7,6 +7,7 @@ agent any
 }
 
 stages {
+
     stage('Checkout') {
         steps {
             git branch: 'main',
@@ -69,4 +70,4 @@ post {
     failure {
         echo "Deployment failed. Check Jenkins or EC2 logs."
     }
-}
+}    
