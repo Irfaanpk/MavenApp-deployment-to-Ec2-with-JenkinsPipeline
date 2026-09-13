@@ -1,14 +1,12 @@
 pipeline {
 agent any
 
-```
-tools {
+    tools {
     maven 'maven'
     jdk 'jdk-17'
 }
 
 stages {
-
     stage('Checkout') {
         steps {
             git branch: 'main',
@@ -71,7 +69,4 @@ post {
     failure {
         echo "Deployment failed. Check Jenkins or EC2 logs."
     }
-}
-```
-
 }
