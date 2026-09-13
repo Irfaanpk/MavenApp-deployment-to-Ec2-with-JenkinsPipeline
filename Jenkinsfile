@@ -30,7 +30,7 @@ stages {
 
     stage('Deploy to EC2') {
         steps {
-            sshagent(['ec2-ssh-key']) {
+            sshagent(['deploy-creds']) {
                 bat '''
                     echo ========================================
                     echo        COPYING ARTIFACT TO EC2
@@ -38,7 +38,7 @@ stages {
 
                     scp -o StrictHostKeyChecking=no ^
                     target\\demo-1.0.0.jar ^
-                    ubuntu@44.200.101.190:/opt/app/
+                    ubuntu@3.91.55.4:/opt/app/
 
                     echo.
                     echo ========================================
@@ -46,11 +46,11 @@ stages {
                     echo ========================================
 
                     ssh -o StrictHostKeyChecking=no ^
-                    ubuntu@44.200.101.190 ^
+                    ubuntu@3.91.55.4 ^
                     "pkill -f demo-1.0.0.jar || true"
 
                     ssh -o StrictHostKeyChecking=no ^
-                    ubuntu@44.200.101.190 ^
+                    ubuntu@3.91.55.4 ^
                     "nohup java -jar /opt/app/demo-1.0.0.jar > /opt/app/app.log 2>&1 &"
 
                     echo.
